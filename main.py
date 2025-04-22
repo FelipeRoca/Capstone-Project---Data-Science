@@ -93,6 +93,9 @@ for column in ['EstadoCivil', 'Genero', 'Educacion', 'Ocupacion', 'Region']:
 # Ocupacion (Obrero especializado -> 0 , ->1 , Gestion-> 2 , Obrero - > 3 , profesional -> 4)
 # Region (Centro-> 0 , -> 1 , Norte-> 2 , Sur->3)
 
+# para reemplazar 2 por 1
+clientes['EstadoCivil'] = clientes['EstadoCivil'].replace(2, 0)  #ver a que se debe que haya estados civiles 2. Y ver si eliminarlos o modificar esto
+# los valores estadisticos no varian
 
 
 # Variables mas importantes
@@ -285,6 +288,7 @@ for column in ['EstadoCivil', 'Genero', 'Educacion', 'Ocupacion', 'Region']:
     le = LabelEncoder()
     destinatarios[column] = le.fit_transform(destinatarios[column])
     label_encoders[column] = le # Guardar los encoders para usar luego en destinatarios
+
 
 
 
