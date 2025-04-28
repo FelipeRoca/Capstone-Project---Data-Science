@@ -1,16 +1,13 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import warnings
-warnings.filterwarnings("ignore")
 import seaborn as sns
-
-
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, ConfusionMatrixDisplay, confusion_matrix
+
 
 # --- PREPROCESAMIENTO DE CLIENTES ---
 clientes = pd.read_csv('clientes.csv')
@@ -113,6 +110,14 @@ model.fit(X_train, y_train)
 # evaluo el modelo
 y_pred = model.predict(X_test)
 print(classification_report(y_test, y_pred))
+# Calcular la matriz de confusión
+cm = confusion_matrix(y_test, y_pred)
+
+# Mostrar la matriz de confusión
+disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
+disp.plot(cmap='Blues')  # podés cambiar el color si querés
+plt.title('Matriz de Confusión')
+plt.show()
 
 
 # DATOS IMPORTANTES DE ESTA EVALUACION
@@ -256,6 +261,8 @@ plt.show()
 
 
 
+
+# Si se deberia obtener los clientes a enviar el mail y emparejar los mismos con la lista de destinatarios, esto no sirve
 
 #       EVALUACION DE LOS DESTINATARIOS
 
